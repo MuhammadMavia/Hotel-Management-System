@@ -1,0 +1,30 @@
+{
+  "name": "Hotel Management",
+  "version": "0.0.1",
+  "authors": [
+    "TechNDevs"
+  ],
+  "description": "DilPasand",
+  "main": "./bin/www",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "Hotel"
+  ],
+  "license": "MIT",
+  "homepage": "./public/index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libraries"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-ui-router": "ui-router#~0.2.15",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "angular-bootstrap": "~0.13.4"
+  }
+}

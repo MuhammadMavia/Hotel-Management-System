@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>DilPasand</h2>
+        <h4>Admin Panel</h4>
+        <div class="btn-group pull-right">
+            <button ng-click="logout()" class="btn btn-danger btn-sm">LogOut</button>
+        </div>
+    </div>
+    <tabset justified="true">
+        <tab heading="Settings" ui-sref="adminPanel.settings">
+            <ui-view name="settingsContent"></ui-view>
+        </tab>
+        <tab heading="Reports" ui-sref="adminPanel.data">
+            <ui-view name="dataContent"></ui-view>
+        </tab>
+        <tab heading="Users" ui-sref="adminPanel.users">
+            <ui-view name="usersContent"></ui-view>
+        </tab>
+    </tabset>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">DilPasand Powered by <a href="http://techndevs.com" target="_blank">TechNDevs</a></p>
+    </div>
+</footer>

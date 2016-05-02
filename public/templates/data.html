@@ -1,0 +1,121 @@
+<div class="admin" style="margin-top: 20px;">
+    <div>
+        <div class="row">
+            <div class="col-md-5">
+                <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="{{vm.format}}" ng-model="vm.dt"
+                           is-open="vm.status.opened" datepicker-options="vm.dateOptions"
+                           date-disabled="vm.disabled(date, mode)" ng-required="true" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-primary" ng-click="vm.open1($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                </p>
+            </div>
+            <div class="col-md-5">
+                <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="{{vm.format2}}" ng-model="vm.dt2"
+                           is-open="vm.status2.opened" datepicker-options="vm.dateOptions2"
+                           date-disabled="vm.disabled(date, mode)" ng-required="true" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-primary" ng-click="vm.open2($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                </p>
+            </div>
+
+            <div class="col-md-2">
+                <button ng-click="vm.searchByDate()" type="button" class="btn btn-primary" style="width: 100%">
+                    Search
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="table-responsive" style="max-height: 500px;">
+                <table class="table table-striped table-condensed table-hover table-bordered">
+                    <thead>
+                    <tr class="bg-primary">
+                        <td class=""><b>S.No</b></td>
+                        <td class=""><b>Category</b></td>
+                        <td class=""><b>Item</b></td>
+                        <td class=""><b>Rate</b></td>
+                        <td class=""><b>Qty</b></td>
+                        <td class=""><b>Amount</b></td>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="val in vm.showReport track by $index"
+                        ng-if="val.showHideItem && val.showHideCat">
+                        <td>{{val.s}}</td>
+                        <td>{{val.category}}</td>
+                        <td>{{val.item}}</td>
+                        <td>rs. {{val.perRate}}</td>
+                        <td>{{val.qty}}</td>
+                        <td>rs. {{val.perRate*val.qty}}</td>
+                    </tr>
+                    <tfoot>
+                    <tr class="bg-success">
+                        <th colspan="1">Date</th>
+                        <th colspan="2">{{vm.byDate}}</th>
+                        <th colspan="1">Total</th>
+                        <th colspan="1">{{vm.totalQty || "0"}}</th>
+                        <th colspan="1">rs. {{vm.totalAmount || "0"}}</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        '
+        <div class="col-md-4">
+            <div class="table-responsive" style="max-height: 500px;">
+                <table class="table table-striped table-condensed table-hover table-bordered">
+                    <tr style="background-color: #337ab7;color: #fff;">
+                        <td class=""><b>category</b>
+                            <label class="label--checkbox" style="float: right">
+                                <input ng-checked="vm.allCatSlt"
+                                       ng-change="vm.allCatSltFunc(true);vm.showSelectAll(true,vm.allCatSlt)"
+                                       class="checkbox" type="checkbox" ng-model="vm.allCatSlt">
+                                Select All</label>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="v in vm.catArr track by $index">
+                        <td>
+                            <label class="label--checkbox">
+                                <input ng-checked="vm.allCatSlt || v.show" class="checkbox" ng-model="v.show"
+                                       value="v.catName" type="checkbox"
+                                       ng-change="vm.allCatSltFunc(false);vm.resultFunc('cat',v.show,v.catName,$index)">
+                                {{v.catName}}
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table table-striped table-condensed table-hover table-bordered"
+                       ng-repeat="v in vm.catArr track by $index" ng-if="v.show || vm.allCatSlt">
+                    <tr style="background-color: #337ab7;color: #fff;">
+                        <th>{{v.catName}}
+                            <label class="label--checkbox" style="float: right">
+                                <input ng-checked="v.allItemSlt || v.show" class="checkbox" type="checkbox"
+                                       ng-change="vm.allItemSltFunc(true,$index);vm.showSelectAll(false,v.allItemSlt,v.catName)"
+                                       ng-model="v.allItemSlt">
+                                Select All</label>
+                        </th>
+                    </tr>
+                    <tr ng-repeat="i in v.itemArr track by $index">
+                        <td>
+                            <label class="label--checkbox">
+                                <input class="checkbox" ng-model="i.show" ng-checked="v.allItemSlt || i.show"
+                                       value="i.item" type="checkbox"
+                                       ng-change="vm.allItemSltFunc(false,$parent.$index);vm.resultFunc('item',i.show,i.item)">
+                                {{i.item}}
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

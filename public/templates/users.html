@@ -1,0 +1,121 @@
+<div class="row admin" style="margin-top: 20px;margin-right: 0; margin-left: 0;">
+
+    <div class="list-group col-md-5">
+        <a class="list-group-item">
+            <h4>
+                <b>User</b>
+                <span style="float: right;margin-left: 5px" class="btn btn-primary" ng-click="vm.open()">
+                    Change password
+                </span>
+                <span ng-click="vm.viewForm()" style="float: right"
+                      class="btn btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i>&nbsp;Add User
+                </span>
+            </h4>
+        </a>
+        <a class="list-group-item">
+            <div class="table-responsive" style="max-height: 500px;">
+                <table class="table table-striped table-condensed table-hover table-bordered">
+                    <tr style="background-color: #337ab7;color: #fff;">
+                        <td style="width: 75%">user name</td>
+                        <td style="width: 25%">action</td>
+                    </tr>
+                    <tr ng-repeat="val in vm.putInList track by $index">
+                        <td style="width: 75%"><b ng-click="vm.viewUser($index)"
+                                                  style="margin-left: 35px">{{val.name}}</b></td>
+                        <td style="width: 25%">
+                            <div class="btn-group">
+                                <button ng-click="vm.userEdit($index)" type="button" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button ng-click="vm.deleteUser($index)" type="button" class="btn btn-danger">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="col-md-7" ng-if="vm.showAndHideForm">
+        <form class="form-group form-group-sm" ng-submit="vm.createUser()">
+            <ul class="list-group">
+                <li class="list-group-item"><h4 ng-hide="vm.editAndAdd">add user</h4><h4 ng-show="vm.editAndAdd">edit
+                    user</h4></li>
+                <li class="list-group-item"><input autofocus ng-model="vm.name" type="text" class="form-control"
+                                                   placeholder="User Name">
+                    <hr/>
+                </li>
+                <li class="list-group-item"><input ng-model="vm.email" type="text" class="form-control"
+                                                   placeholder="Email">
+                    <hr/>
+                </li>
+                <li class="list-group-item"><input ng-model="vm.password" type="password" class="form-control"
+                                                   placeholder="Password">
+                    <hr/>
+                </li>
+                <li class="list-group-item"><input ng-model="vm.nic" type="number" class="form-control"
+                                                   placeholder="N.I.C No">
+                    <hr/>
+                </li>
+                <li class="list-group-item"><input ng-model="vm.mobile" type="number" class="form-control"
+                                                   placeholder="Mobile No">
+                    <hr/>
+                </li>
+                <li class="list-group-item">
+                    <div style="padding: 10px 15px 10px 0;text-align: right">
+                        <button data-ng-disabled="!vm.mobile || !vm.nic || !vm.password || !vm.email || !vm.name"
+                                type="submit" ng-hide="vm.editAndAdd" class="btn btn-primary">Add
+                        </button>
+                        <button data-ng-disabled="!vm.mobile || !vm.nic || !vm.password || !vm.email || !vm.name"
+                                type="submit" ng-show="vm.editAndAdd" class="btn btn-primary">Edit
+                        </button>
+                        <button ng-click="vm.clearForm()" type="button" class="btn btn-default">Cancel</button>
+                    </div>
+                </li>
+            </ul>
+            <br/>
+        </form>
+    </div>
+    <div class="col-md-7" ng-if="!vm.showAndHideUser">
+        <div class="list-group">
+            <a class="list-group-item"><h4>{{vm.view.name}}</h4></a>
+            <a class="list-group-item">Name : {{vm.view.name}}</a>
+            <a class="list-group-item">email : {{vm.view.email}}</a>
+            <a class="list-group-item">password : {{vm.view.password}}</a>
+            <a class="list-group-item">N.I.C No : {{vm.view.nic}}</a>
+            <a class="list-group-item"> Mobile No : {{vm.view.mobile}}</a>
+        </div>
+    </div>
+
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Change password</h3>
+        </div>
+        <div class="modal-body">
+            <form class="form-group form-group-sm" ng-submit="vm.createUser()">
+                <ul class="list-group">
+
+                    <li class="list-group-item"><input ng-model="vm.old" type="password" class="form-control"
+                                                       placeholder="Old Password">
+                    <li class="list-group-item"><input ng-model="vm.new" type="password" class="form-control"
+                                                       placeholder="New Password">
+                    <li class="list-group-item"><input ng-model="vm.con" type="password" class="form-control"
+                                                       placeholder="Confirm Password">
+                    <li class="list-group-item"><input ng-model="vm.nic" type="number" class="form-control"
+                                                       placeholder="C.N.I.C">
+                </ul>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" ng-click="vm.ok()" class="btn btn-primary">Done</button>
+            <button type="submit" ng-click="vm.cancel()" class="btn btn-default">Cancel</button>
+        </div>
+    </script>
+
+</div>

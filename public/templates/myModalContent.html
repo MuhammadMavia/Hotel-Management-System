@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h3 class="modal-title">Change password</h3>
+</div>
+<div class="modal-body">
+    <form class="form-group form-group-sm" ng-submit="vm.createUser()">
+        <ul class="list-group">
+
+            <li class="list-group-item"><input ng-model="vm.old" type="password" class="form-control" placeholder="Old Password">
+            <li class="list-group-item"><input ng-model="vm.new" type="password" class="form-control" placeholder="New Password">
+            <li class="list-group-item"><input ng-model="vm.con" type="password" class="form-control" placeholder="Confirm Password">
+            <li class="list-group-item"><input ng-model="vm.nic" type="number" class="form-control" placeholder="C.N.I.C">
+        </ul>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" ng-click="vm.ok()" class="btn btn-primary">Done</button>
+    <button type="submit" ng-click="vm.cancel()" class="btn btn-default">Cancel</button>
+</div>

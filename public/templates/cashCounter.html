@@ -1,0 +1,117 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>DilPasand<span style="float: right">User name</span></h2>
+        <h4>Cash Counter<span style="float: right">{{vm.fullDate[1].toLocaleTimeString()}}</span></h4>
+        <div class="btn-group pull-right">
+            <button ng-click="logout()" class="btn btn-danger btn-sm">LogOut</button>
+        </div>
+    </div>
+    <div class="cashCounter" style="padding: 20px 50px 50px 50px">
+        <div>
+            <form class="form-group" ng-submit="vm.addItem()">
+                <div class="row">
+                    <input style="width: 20%" class="form-control col-md-4" autofocus ng-change="vm.getCategory()"
+                           ng-model="vm.category" type="number" placeholder="Category">
+
+                    <h2 ng-if="vm.categoryLebel" class="label label-primary col-md-8"
+                        style="margin-left: 20px;margin-top:-3px;font-size: x-large;display: inline">{{vm.categoryLebel
+                        | uppercase}}
+                    </h2>
+                </div>
+                <hr/>
+                <div class="row">
+                    <input style="width: 20%" ng-change="vm.getItem()" ng-model="vm.item" type="number"
+                           class="form-control col-md-4" data-ng-disabled="!vm.category || vm.category <= 0"
+                           placeholder="Item">
+
+                    <h2 ng-if="vm.itemRate" class="label label-primary col-md-8"
+                        style="margin-left: 20px;margin-top:-3px;font-size: x-large;display: inline">
+                        {{vm.itemLebel | uppercase}} rs.{{vm.itemRate | uppercase}}</h2>
+                </div>
+                <hr/>
+                <div class="row">
+                    <input style="width: 20%" ng-model="vm.qty" type="number" class="form-control col-md-4"
+                           placeholder="Quantity" ng-change="vm.setQty()" data-ng-disabled="!vm.category || !vm.item || vm.category <= 0 || vm.item <= 0">
+
+                    <div style="text-align: center">
+                        <button type="submit" ng-show="vm.showHideEidt"
+                                data-ng-disabled="!vm.categoryLebel || !vm.itemLebel || !vm.qty || vm.category <= 0 || vm.item <= 0"
+                                class="btn btn-primary my-btn">
+                            Done
+                        </button>
+                        <button type="submit" ng-hide="vm.showHideEidt"
+                                data-ng-disabled="!vm.categoryLebel || !vm.itemLebel || !vm.qty || vm.qty <= 0 || vm.category <= 0 || vm.item <= 0"
+                                class="btn btn-primary my-btn">
+                            Add
+                        </button>
+                        <button ng-show="vm.showHideEidt" ng-click="vm.clearForm()" type="button"
+                                class="btn btn-default my-btn">
+                            Cancel
+                        </button>
+                        <button ng-hide="vm.showHideEidt" ng-click="vm.clearForm()" type="button"
+                                class="btn btn-default my-btn">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <hr/>
+
+            <div>
+                <div class="table-responsive" ng-show="vm.selectedItems.length" style="max-height: 475px;">
+                    <table class="table table-striped table-condensed table-hover table-bordered">
+                        <thead>
+                        <tr class="bg-primary">
+                            <td><b>S.No</b></td>
+                            <td><b>Category</b></td>
+                            <td><b>Item no</b></td>
+                            <td><b>Item</b></td>
+                            <td><b>Rate</b></td>
+                            <td><b>Qty</b></td>
+                            <td><b>Amount</b></td>
+                            <td><b>Action</b></td>
+                        </tr>
+                        </thead>
+                        <tbody style="max-height: 450px;height: 450px">
+                        <tr ng-repeat="val in vm.selectedItems | orderBy:'categoryNo'">
+                            <td> {{$index+1}}</td>
+                            <td> {{val.categoryNo}} ({{val.category}})</td>
+                            <td> {{val.itemNo}}</td>
+                            <td>{{val.item}}</td>
+                            <td>rs. {{val.perRate}}</td>
+                            <td>{{val.qty}}</td>
+                            <td>{{val.perRate*val.qty}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button ng-click="vm.itemEdit($index)" type="button" class="btn btn-primary">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </button>
+                                    <button ng-click="vm.removeItem($index)" type="button" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot class="bg-success">
+                        <tr>
+                            <th colspan="1">Date</th>
+                            <th colspan="3">{{vm.fullDate[0]}} {{vm.fullDate[1] | date:'medium'}}</th>
+                            <th colspan="2">Total</th>
+                            <th colspan="1">rs. {{vm.getTotal()}}</th>
+                            <th colspan="1">
+                                <button ng-click="vm.saveToLocalStorage()" class="btn btn-primary">Print</button>
+                            </th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">DilPasand Powered by <a href="http://techndevs.com" target="_blank">TechNDevs</a></p>
+    </div>
+</footer>
